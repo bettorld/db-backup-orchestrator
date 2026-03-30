@@ -1,0 +1,23 @@
+# Minimal ignore for test image — we need tests/ and pyproject.toml
+.git/
+.gitignore
+docs/
+*.md
+Makefile
+docker-bake.hcl
+Dockerfile
+Dockerfile.test
+.dockerignore
+Dockerfile.test.dockerignore
+.vscode/
+.idea/
+__pycache__/
+*.py[cod]
+.ruff_cache/
+.pytest_cache/
+.DS_Store
+.env
+.venv/
+venv/
+test-backups/
+.claude/

@@ -1,0 +1,78 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build production image
+        run: make build IMAGE_TAG=production PUSH=false
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build test image
+        run: make build-test
+
+      - name: Run ruff
+        run: make lint
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build test image
+        run: make build-test
+
+      - name: Run unit tests with coverage
+        run: |
+          docker run --rm \
+            $(docker images --format '{{.Repository}}:{{.Tag}}' | grep -- '-test$' | head -1) \
+            tests/unit/ \
+            --cov=db_backup_orchestrator \
+            --cov-report=term-missing \
+            --cov-report=xml:/tmp/coverage.xml \
+            --timeout=30
+
+      - name: Extract coverage report
+        run: |
+          container_id=$(docker create $(docker images --format '{{.Repository}}:{{.Tag}}' | grep -- '-test$' | head -1))
+          docker cp "$container_id":/tmp/coverage.xml ./coverage.xml 2>/dev/null || true
+          docker rm "$container_id"
+
+      - name: Upload coverage to Codecov
+        if: hashFiles('coverage.xml') != ''
+        uses: codecov/codecov-action@v4
+        with:
+          files: ./coverage.xml
+          fail_ci_if_error: false
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+  integration:
+    name: Integration Tests
+    runs-on: ubuntu-latest
+    needs: [lint, test]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build test image
+        run: make build-test
+
+      - name: Run integration tests
+        run: make test-integration

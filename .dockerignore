@@ -1,0 +1,43 @@
+# Git
+.git/
+.gitignore
+
+# Documentation
+docs/
+*.md
+
+# Tests
+tests/
+pyproject.toml
+.pytest_cache/
+
+# Build configs (not needed inside container)
+Makefile
+docker-bake.hcl
+Dockerfile
+.dockerignore
+
+# IDE
+.vscode/
+.idea/
+
+# Python caches
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ruff_cache/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.venv/
+venv/
+
+# Test artifacts
+test-backups/
+
+# Claude
+.claude/

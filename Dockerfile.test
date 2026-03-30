@@ -1,0 +1,15 @@
+ARG DOCKER_REGISTRY=docker.io
+FROM ${DOCKER_REGISTRY}/db-backup-orchestrator:production
+
+WORKDIR /app
+
+# Install test dependencies
+RUN pip install --no-cache-dir pytest>=8.0 pytest-cov>=6.0 pytest-timeout>=2.3 ruff>=0.8
+
+# Copy test files and config (these are excluded from main .dockerignore,
+# so we build with --file and explicit context)
+COPY tests/ ./tests/
+COPY pyproject.toml .
+
+ENTRYPOINT ["pytest"]
+CMD ["tests/", "-v"]
