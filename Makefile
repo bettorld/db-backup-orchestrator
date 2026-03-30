@@ -11,9 +11,9 @@
 PUSH = false
 CLEAN = false
 
-DOCKER_REGISTRY ?= docker.io
+DOCKER_REGISTRY ?= ghcr.io/bettorld
 IMAGE_NAME = db-backup-orchestrator
-IMAGE_TAG = production
+IMAGE_TAG = latest
 IMAGE = $(DOCKER_REGISTRY)/$(IMAGE_NAME):$(IMAGE_TAG)
 TEST_IMAGE = $(DOCKER_REGISTRY)/$(IMAGE_NAME):$(IMAGE_TAG)-test
 
@@ -39,7 +39,7 @@ help:
 	printf "  clean            Remove images, containers, and caches\n"
 	printf "  help             Show this help\n\n"
 	printf "Variables:\n"
-	printf "  IMAGE_TAG   Image tag (default: production)\n"
+	printf "  IMAGE_TAG   Image tag (default: latest)\n"
 	printf "  PUSH        Push after build (default: false)\n"
 	printf "  CLEAN       Remove local image after build (default: false)\n"
 	printf "  PLATFORM    Build platform (default: linux/amd64)\n"
@@ -56,7 +56,7 @@ print_box:
 
 # ─── Build ────────────────────────────────────────────────────────────────────
 
-# Usage: make build IMAGE_TAG=production PUSH=true
+# Usage: make build IMAGE_TAG=latest PUSH=true
 build:
 	$(MAKE) print_box MSG="Building image: $(IMAGE)"
 	docker build --platform $(PLATFORM) -t $(IMAGE) .
@@ -102,13 +102,13 @@ build-multi:
 			--builder $(BUILDER_NAME) \
 			--platform $(PLATFORMS) \
 			--tag $(IMAGE) \
-			--tag $(DOCKER_REGISTRY)/$(IMAGE_NAME):production \
+			--tag $(DOCKER_REGISTRY)/$(IMAGE_NAME):latest \
 			--push .; \
 	else \
 		$(MAKE) print_box MSG="Push skipped"; \
 	fi
 
-# Usage: make bake IMAGE_TAG=production PUSH=true
+# Usage: make bake IMAGE_TAG=latest PUSH=true
 bake:
 	$(MAKE) print_box MSG="Baking image: $(IMAGE)"
 	IMAGE_TAG=$(IMAGE_TAG) docker buildx bake

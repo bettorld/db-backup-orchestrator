@@ -13,8 +13,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build production image
-        run: make build IMAGE_TAG=production PUSH=false
+      - name: Build image
+        run: make build IMAGE_TAG=latest PUSH=false
 
   lint:
     name: Lint
@@ -41,28 +41,28 @@ jobs:
 
       - name: Run unit tests with coverage
         run: |
-          docker run --rm \
-            $(docker images --format '{{.Repository}}:{{.Tag}}' | grep -- '-test$' | head -1) \
+          TEST_IMAGE=$(docker images --format '{{.Repository}}:{{.Tag}}' | grep -- '-test$' | head -1)
+          docker run --name dbo-coverage \
+            "$TEST_IMAGE" \
             tests/unit/ \
             --cov=db_backup_orchestrator \
             --cov-report=term-missing \
-            --cov-report=xml:/tmp/coverage.xml \
+            --cov-report=xml:/app/coverage.xml \
             --timeout=30
 
       - name: Extract coverage report
+        if: always()
         run: |
-          container_id=$(docker create $(docker images --format '{{.Repository}}:{{.Tag}}' | grep -- '-test$' | head -1))
-          docker cp "$container_id":/tmp/coverage.xml ./coverage.xml 2>/dev/null || true
-          docker rm "$container_id"
+          docker cp dbo-coverage:/app/coverage.xml ./coverage.xml 2>/dev/null || true
+          docker rm dbo-coverage
 
       - name: Upload coverage to Codecov
         if: hashFiles('coverage.xml') != ''
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           files: ./coverage.xml
+          token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: false
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   integration:
     name: Integration Tests

@@ -2,7 +2,7 @@
 
 ← [Back to index](../README.md)
 
-All tests run **inside a container** - no Python, pytest, or ruff needed on the host machine. Only Docker is required. `Dockerfile.test` builds on top of the production image and adds pytest and ruff. `Dockerfile.test.dockerignore` is configured to allow tests through into the test image.
+All tests run **inside a container** - no Python, pytest, or ruff needed on the host machine. Only Docker is required. `Dockerfile.test` builds on top of the latest image and adds pytest and ruff. `Dockerfile.test.dockerignore` is configured to allow tests through into the test image.
 
 ```bash
 make test             # Run all tests (test-unit + test-integration) inside container
@@ -12,7 +12,7 @@ make test-coverage    # Run unit tests with coverage report inside container
 make lint             # Lint inside container (no local ruff needed)
 ```
 
-The test image is tagged as `${DOCKER_REGISTRY}/db-backup-orchestrator:IMAGE_TAG-test` (e.g., `production-test`, `1.0.0-test`).
+The test image is tagged as `${DOCKER_REGISTRY}/db-backup-orchestrator:IMAGE_TAG-test` (e.g., `latest-test`, `1.0.0-test`).
 
 ## Tests - Unit
 

@@ -18,7 +18,7 @@ docker run --rm \
   -v /path/to/backups:/backups \
   -e DB_USER="$DB_USER" \
   -e DB_PASSWORD="$DB_PASSWORD" \
-  db-backup-orchestrator:production \
+  db-backup-orchestrator:latest \
   backup --full --driver mysql --version 8.0 \
   --host db.prod.example.com --connection prod-mysql
 
@@ -118,7 +118,7 @@ docker run --rm \
   -v /path/to/backups:/backups \
   -e DB_USER="$DB_USER" \
   -e DB_PASSWORD="$DB_PASSWORD" \
-  db-backup-orchestrator:production \
+  db-backup-orchestrator:latest \
   restore --from /backups/prod-main/2026-03-18.001 \
   --host staging-db.example.com \
   --full

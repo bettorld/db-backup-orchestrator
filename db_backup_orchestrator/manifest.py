@@ -118,9 +118,7 @@ class Manifest:
             combined = fingerprint.get("combined", "")
             checks = {k: v for k, v in fingerprint.items() if k != "combined"}
             self.data["verification"] = {
-                "timestamp": datetime.now(timezone.utc).strftime(
-                    "%Y-%m-%dT%H:%M:%SZ"
-                ),
+                "timestamp": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
                 "combined": combined,
                 "checks": checks,
             }

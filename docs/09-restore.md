@@ -293,7 +293,7 @@ docker run --rm \
   -v /path/to/backups:/backups \
   -e DB_USER="admin" \
   -e DB_PASSWORD="s3cret" \
-  db-backup-orchestrator:production \
+  db-backup-orchestrator:latest \
   restore --from /backups/prod-main/2026-03-18.001 \
   --host staging-db.example.com \
   --full
@@ -307,7 +307,7 @@ docker run --rm \
   -v /path/to/backups:/backups \
   -e DB_USER="admin" \
   -e DB_PASSWORD="s3cret" \
-  db-backup-orchestrator:production \
+  db-backup-orchestrator:latest \
   restore --from /backups/prod-main/2026-03-18.001 \
   --host staging-db.example.com \
   --databases app_production \
@@ -323,7 +323,7 @@ docker run --rm \
   -e DB_USER="admin" \
   -e DB_PASSWORD="s3cret" \
   -e BACKUP_ENCRYPT_KEY="my-key" \
-  db-backup-orchestrator:production \
+  db-backup-orchestrator:latest \
   restore --from /backups/prod-main/2026-03-18.001 \
   --host staging-db.example.com \
   --full
@@ -337,7 +337,7 @@ docker run --rm \
   -v /path/to/backups:/backups \
   -e DB_USER="admin" \
   -e DB_PASSWORD="s3cret" \
-  db-backup-orchestrator:production \
+  db-backup-orchestrator:latest \
   restore --from /backups/prod-main/2026-03-18.001 \
   --host staging-db.example.com \
   --tables app_production.sales.orders
@@ -351,7 +351,7 @@ docker run --rm \
   -v /path/to/backups:/backups \
   -e DB_USER="admin" \
   -e DB_PASSWORD="s3cret" \
-  db-backup-orchestrator:production \
+  db-backup-orchestrator:latest \
   restore --from /backups/prod-main/2026-03-18.001 \
   --host staging-db.example.com \
   --globals-only
@@ -365,7 +365,7 @@ docker run --rm \
   -v /path/to/backups:/backups \
   -e DB_USER="admin" \
   -e DB_PASSWORD="s3cret" \
-  db-backup-orchestrator:production \
+  db-backup-orchestrator:latest \
   restore --from /backups/prod-main/2026-03-18.001 \
   --host staging-db.example.com \
   --full \
@@ -380,7 +380,7 @@ docker run --rm \
   -v /path/to/backups:/backups \
   -e DB_USER="admin" \
   -e DB_PASSWORD="s3cret" \
-  db-backup-orchestrator:production \
+  db-backup-orchestrator:latest \
   restore --from /backups/prod-main/2026-03-18.001 \
   --host staging-db.example.com \
   --full --dry-run

@@ -380,7 +380,9 @@ class TestB1TablesFormat:
         _b1_required_args(cfg)  # Should not raise
 
     def test_mysql_tables_need_two_parts(self):
-        cfg = _make_backup_config(full=False, driver="mysql", tables=["db.schema.table"])
+        cfg = _make_backup_config(
+            full=False, driver="mysql", tables=["db.schema.table"]
+        )
         with pytest.raises(SystemExit) as exc_info:
             _b1_required_args(cfg)
         assert exc_info.value.code == 1
@@ -447,7 +449,9 @@ class TestR1RequiredArgs:
         assert exc_info.value.code == 1
 
     def test_no_mode_selected(self):
-        cfg = _make_restore_config(full=False, databases=None, tables=None, globals_only=False)
+        cfg = _make_restore_config(
+            full=False, databases=None, tables=None, globals_only=False
+        )
         with pytest.raises(SystemExit) as exc_info:
             _r1_required_args(cfg)
         assert exc_info.value.code == 1
@@ -531,7 +535,13 @@ class TestR7R8R9:
         (tmp_path / "test.sql").write_text("data")
         cfg = _make_restore_config(from_path=str(tmp_path))
         manifest = {
-            "files": [{"filename": "test.sql", "status": "success", "checksum_sha256": "wrong"}],
+            "files": [
+                {
+                    "filename": "test.sql",
+                    "status": "success",
+                    "checksum_sha256": "wrong",
+                }
+            ],
         }
         with pytest.raises(SystemExit) as exc_info:
             _r8_checksums(cfg, manifest)

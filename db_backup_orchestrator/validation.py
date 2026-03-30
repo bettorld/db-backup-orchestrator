@@ -146,9 +146,7 @@ def _b1_required_args(config: BackupConfig) -> None:
             sys.exit(1)
 
     if config.parallel is not None and config.parallel < 1:
-        logger.error(
-            "Fatal: --parallel must be at least 1. Got: %d", config.parallel
-        )
+        logger.error("Fatal: --parallel must be at least 1. Got: %d", config.parallel)
         sys.exit(1)
 
     # Output dir must be absolute

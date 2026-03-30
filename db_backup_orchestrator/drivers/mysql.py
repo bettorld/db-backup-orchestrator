@@ -256,13 +256,19 @@ class MySQLDriver(BaseDriver):
         cmd = ["bash", "-c", script]
         if output_path:
             return docker_runner.run_to_file(
-                image=image, version=version, command=cmd,
-                output_path=output_path, env=self._env(password),
+                image=image,
+                version=version,
+                command=cmd,
+                output_path=output_path,
+                env=self._env(password),
                 timeout=timeout,
             )
         return docker_runner.run(
-            image=image, version=version, command=cmd,
-            env=self._env(password), timeout=timeout,
+            image=image,
+            version=version,
+            command=cmd,
+            env=self._env(password),
+            timeout=timeout,
         )
 
     def dump_schema(
@@ -282,19 +288,34 @@ class MySQLDriver(BaseDriver):
         """Dump a full database. The schema parameter is ignored for MySQL."""
         cmd = [
             self._dump_binary,
-            "-h", host, "-P", str(port), "-u", user,
-            "--single-transaction", "--routines", "--triggers", "--events",
-            "--databases", database,
+            "-h",
+            host,
+            "-P",
+            str(port),
+            "-u",
+            user,
+            "--single-transaction",
+            "--routines",
+            "--triggers",
+            "--events",
+            "--databases",
+            database,
         ]
         if output_path:
             return docker_runner.run_to_file(
-                image=image, version=version, command=cmd,
-                output_path=output_path, env=self._env(password),
+                image=image,
+                version=version,
+                command=cmd,
+                output_path=output_path,
+                env=self._env(password),
                 timeout=timeout,
             )
         return docker_runner.run(
-            image=image, version=version, command=cmd,
-            env=self._env(password), timeout=timeout,
+            image=image,
+            version=version,
+            command=cmd,
+            env=self._env(password),
+            timeout=timeout,
         )
 
     def dump_table(
@@ -315,18 +336,31 @@ class MySQLDriver(BaseDriver):
         """Dump a specific table. The schema parameter is ignored for MySQL."""
         cmd = [
             self._dump_binary,
-            "-h", host, "-P", str(port), "-u", user,
-            "--single-transaction", database, table,
+            "-h",
+            host,
+            "-P",
+            str(port),
+            "-u",
+            user,
+            "--single-transaction",
+            database,
+            table,
         ]
         if output_path:
             return docker_runner.run_to_file(
-                image=image, version=version, command=cmd,
-                output_path=output_path, env=self._env(password),
+                image=image,
+                version=version,
+                command=cmd,
+                output_path=output_path,
+                env=self._env(password),
                 timeout=timeout,
             )
         return docker_runner.run(
-            image=image, version=version, command=cmd,
-            env=self._env(password), timeout=timeout,
+            image=image,
+            version=version,
+            command=cmd,
+            env=self._env(password),
+            timeout=timeout,
         )
 
     # ── Restore ───────────────────────────────────────────────────────

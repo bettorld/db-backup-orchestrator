@@ -29,7 +29,9 @@ class Restorer:
             os.environ["BACKUP_ENCRYPT_KEY"] = config.encrypt_key
 
         # ── Resolve driver ────────────────────────────────────────────
-        driver = get_driver(config.driver or manifest["driver"], version=config.effective_version)
+        driver = get_driver(
+            config.driver or manifest["driver"], version=config.effective_version
+        )
         image = config.image
         version = config.effective_version
 
@@ -89,15 +91,19 @@ class Restorer:
                 # should NOT explicitly create/drop — the dump handles it.
                 # Only PostgreSQL needs explicit DB management for schema restores.
                 is_mysql_schema = (
-                    config.driver in ("mysql", "mariadb")
-                    and file_type == "schema"
+                    config.driver in ("mysql", "mariadb") and file_type == "schema"
                 )
 
                 # MySQL/MariaDB schema: dump SQL has CREATE DATABASE + USE,
                 # so we only need to DROP if --drop-databases, skip CREATE.
                 # Always attempt DROP IF EXISTS (not just when DB exists) to
                 # clean up orphaned schema directories from failed restores.
-                if is_mysql_schema and database and config.drop_databases and database not in dropped_databases:
+                if (
+                    is_mysql_schema
+                    and database
+                    and config.drop_databases
+                    and database not in dropped_databases
+                ):
                     logger.warning(
                         "Dropping database '%s' on %s before restore.",
                         database,
@@ -133,7 +139,12 @@ class Restorer:
                         exit_code = 2
                         break
                     dropped_databases.add(database)
-                elif is_mysql_schema and database and not config.drop_databases and database not in dropped_databases:
+                elif (
+                    is_mysql_schema
+                    and database
+                    and not config.drop_databases
+                    and database not in dropped_databases
+                ):
                     db_exists = driver.check_database_exists(
                         docker_runner,
                         image,
@@ -277,7 +288,11 @@ class Restorer:
                         dropped_databases.add(database)
 
                 # MySQL/MariaDB: table restores still need the DB to exist
-                if file_type == "table" and database and config.driver in ("mysql", "mariadb"):
+                if (
+                    file_type == "table"
+                    and database
+                    and config.driver in ("mysql", "mariadb")
+                ):
                     db_exists = driver.check_database_exists(
                         docker_runner,
                         image,

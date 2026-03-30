@@ -55,7 +55,7 @@ docker run --rm \
   -v /path/to/backups:/backups \
   -e DB_USER="$DB_USER" \
   -e DB_PASSWORD="$DB_PASSWORD" \
-  db-backup-orchestrator:production \
+  db-backup-orchestrator:latest \
   backup --full \
   --driver mysql --version 8.0 \
   --host mysql.prod.internal \
@@ -74,7 +74,7 @@ docker run --rm \
   -e DB_USER="$DB_USER" \
   -e DB_PASSWORD="$DB_PASSWORD" \
   -e BACKUP_ENCRYPT_KEY="$BACKUP_ENCRYPT_KEY" \
-  db-backup-orchestrator:production \
+  db-backup-orchestrator:latest \
   backup --full --encrypt \
   --driver postgres --version 16 \
   --host db.prod.example.com \
@@ -89,7 +89,7 @@ docker run --rm \
   -v /path/to/backups:/backups \
   -e DB_USER="$DB_USER" \
   -e DB_PASSWORD="$DB_PASSWORD" \
-  db-backup-orchestrator:production \
+  db-backup-orchestrator:latest \
   backup --databases-only \
   --driver mysql --version 8.0 \
   --host mysql.prod.internal \
@@ -104,7 +104,7 @@ docker run --rm \
   -v /path/to/backups:/backups \
   -e DB_USER="$DB_USER" \
   -e DB_PASSWORD="$DB_PASSWORD" \
-  db-backup-orchestrator:production \
+  db-backup-orchestrator:latest \
   backup --databases app_production --schemas public sales \
   --driver postgres --version 16 \
   --host db.prod.example.com \
@@ -119,7 +119,7 @@ docker run --rm \
   -v /path/to/backups:/backups \
   -e DB_USER="$DB_USER" \
   -e DB_PASSWORD="$DB_PASSWORD" \
-  db-backup-orchestrator:production \
+  db-backup-orchestrator:latest \
   backup --tables app_db.orders app_db.customers \
   --driver mariadb --version 10.11 \
   --host maria.prod.internal \
@@ -134,7 +134,7 @@ docker run --rm \
   -v /path/to/backups:/backups \
   -e DB_USER="$DB_USER" \
   -e DB_PASSWORD="$DB_PASSWORD" \
-  db-backup-orchestrator:production \
+  db-backup-orchestrator:latest \
   backup --globals-only \
   --driver postgres --version 16 \
   --host db.prod.example.com \
@@ -149,7 +149,7 @@ docker run --rm \
   -v /path/to/backups:/backups \
   -e DB_USER="$DB_USER" \
   -e DB_PASSWORD="$DB_PASSWORD" \
-  db-backup-orchestrator:production \
+  db-backup-orchestrator:latest \
   backup --full \
   --driver postgres --version 16 \
   --host db.prod.example.com \
@@ -167,7 +167,7 @@ docker run --rm \
   -v /path/to/backups:/backups \
   -e DB_USER="$DB_USER" \
   -e DB_PASSWORD="$DB_PASSWORD" \
-  db-backup-orchestrator:production \
+  db-backup-orchestrator:latest \
   backup --databases app_production --no-compress \
   --driver postgres --version 16 \
   --host db.prod.example.com \
@@ -182,7 +182,7 @@ docker run --rm \
   -v /path/to/backups:/backups \
   -e DB_USER="$DB_USER" \
   -e DB_PASSWORD="$DB_PASSWORD" \
-  db-backup-orchestrator:production \
+  db-backup-orchestrator:latest \
   backup --full --verify --verbose \
   --driver postgres --version 16 \
   --host db.prod.example.com \
@@ -197,7 +197,7 @@ docker run --rm \
   -v /path/to/backups:/backups \
   -e DB_USER="$DB_USER" \
   -e DB_PASSWORD="$DB_PASSWORD" \
-  db-backup-orchestrator:production \
+  db-backup-orchestrator:latest \
   backup --full \
   --driver mysql --version 8.0 \
   --host mysql.prod.internal \
@@ -214,7 +214,7 @@ docker run --rm \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -e DB_USER="$DB_USER" \
   -e DB_PASSWORD="$DB_PASSWORD" \
-  db-backup-orchestrator:production \
+  db-backup-orchestrator:latest \
   backup --full --dry-run \
   --driver postgres --version 16 \
   --host db.prod.example.com \
@@ -233,7 +233,7 @@ docker run --rm \
   -v /path/to/backups:/backups \
   -e DB_USER="$DB_USER" \
   -e DB_PASSWORD="$DB_PASSWORD" \
-  db-backup-orchestrator:production \
+  db-backup-orchestrator:latest \
   restore --from /backups/prod-main/2026-03-18.001 \
   --host staging-db.example.com \
   --full --drop-databases
@@ -248,7 +248,7 @@ docker run --rm \
   -e DB_USER="$DB_USER" \
   -e DB_PASSWORD="$DB_PASSWORD" \
   -e BACKUP_ENCRYPT_KEY="$BACKUP_ENCRYPT_KEY" \
-  db-backup-orchestrator:production \
+  db-backup-orchestrator:latest \
   restore --from /backups/prod-main/2026-03-18.001 \
   --host staging-db.example.com \
   --full --drop-databases
@@ -262,7 +262,7 @@ docker run --rm \
   -v /path/to/backups:/backups \
   -e DB_USER="$DB_USER" \
   -e DB_PASSWORD="$DB_PASSWORD" \
-  db-backup-orchestrator:production \
+  db-backup-orchestrator:latest \
   restore --from /backups/prod-main/2026-03-18.001 \
   --host staging-db.example.com \
   --databases app_production --drop-databases
@@ -276,7 +276,7 @@ docker run --rm \
   -v /path/to/backups:/backups \
   -e DB_USER="$DB_USER" \
   -e DB_PASSWORD="$DB_PASSWORD" \
-  db-backup-orchestrator:production \
+  db-backup-orchestrator:latest \
   restore --from /backups/prod-main/2026-03-18.001 \
   --host staging-db.example.com \
   --globals-only
@@ -290,7 +290,7 @@ docker run --rm \
   -v /path/to/backups:/backups \
   -e DB_USER="$DB_USER" \
   -e DB_PASSWORD="$DB_PASSWORD" \
-  db-backup-orchestrator:production \
+  db-backup-orchestrator:latest \
   restore --from /backups/prod-main/2026-03-18.001 \
   --host staging-db.example.com \
   --full --drop-databases --drop-users
@@ -304,7 +304,7 @@ docker run --rm \
   -v /path/to/backups:/backups \
   -e DB_USER="$DB_USER" \
   -e DB_PASSWORD="$DB_PASSWORD" \
-  db-backup-orchestrator:production \
+  db-backup-orchestrator:latest \
   restore --from /backups/prod-main/2026-03-18.001 \
   --host staging-db.example.com \
   --full --drop-databases --verify --verbose
@@ -318,7 +318,7 @@ docker run --rm \
   -v /path/to/backups:/backups \
   -e DB_USER="$DB_USER" \
   -e DB_PASSWORD="$DB_PASSWORD" \
-  db-backup-orchestrator:production \
+  db-backup-orchestrator:latest \
   restore --from /backups/prod-main/2026-03-18.001 \
   --host staging-db.example.com \
   --full --dry-run

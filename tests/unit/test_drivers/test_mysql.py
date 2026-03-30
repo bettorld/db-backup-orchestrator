@@ -395,9 +395,17 @@ class TestDatabaseManagement:
             is False
         )
 
-    def test_drop_database(self, driver, mock_runner):
+    def test_drop_database_contains_db_name(self, driver, mock_runner):
         driver.drop_database(
-            mock_runner, "mysql", "8.0", "host", 3306, "admin", "secret", "testdb", 30,
+            mock_runner,
+            "mysql",
+            "8.0",
+            "host",
+            3306,
+            "admin",
+            "secret",
+            "testdb",
+            30,
         )
         cmd = mock_runner.run.call_args[1]["command"]
         assert "DROP DATABASE" in " ".join(cmd)
@@ -408,20 +416,44 @@ class TestDatabaseManagement:
             stdout="app_user@%\nreporting@localhost\n", stderr="", returncode=0
         )
         users = driver.list_users(
-            mock_runner, "mysql", "8.0", "host", 3306, "admin", "secret", 30,
+            mock_runner,
+            "mysql",
+            "8.0",
+            "host",
+            3306,
+            "admin",
+            "secret",
+            30,
         )
         assert users == ["app_user@%", "reporting@localhost"]
 
     def test_list_users_failure(self, driver, mock_runner):
-        mock_runner.run.return_value = DockerResult(stdout="", stderr="error", returncode=1)
+        mock_runner.run.return_value = DockerResult(
+            stdout="", stderr="error", returncode=1
+        )
         users = driver.list_users(
-            mock_runner, "mysql", "8.0", "host", 3306, "admin", "secret", 30,
+            mock_runner,
+            "mysql",
+            "8.0",
+            "host",
+            3306,
+            "admin",
+            "secret",
+            30,
         )
         assert users == []
 
     def test_drop_user(self, driver, mock_runner):
         driver.drop_user(
-            mock_runner, "mysql", "8.0", "host", 3306, "admin", "secret", "app_user@%", 30,
+            mock_runner,
+            "mysql",
+            "8.0",
+            "host",
+            3306,
+            "admin",
+            "secret",
+            "app_user@%",
+            30,
         )
         cmd = mock_runner.run.call_args[1]["command"]
         assert "DROP USER" in " ".join(cmd)
@@ -431,8 +463,15 @@ class TestDatabaseManagement:
         """SQL injection: single quotes in DB name are escaped."""
         mock_runner.run.return_value = DockerResult(stdout="1", stderr="", returncode=0)
         driver.check_database_exists(
-            mock_runner, "mysql", "8.0", "host", 3306, "admin", "secret",
-            "db'injection", 30,
+            mock_runner,
+            "mysql",
+            "8.0",
+            "host",
+            3306,
+            "admin",
+            "secret",
+            "db'injection",
+            30,
         )
         cmd = mock_runner.run.call_args[1]["command"]
         sql = cmd[-1]

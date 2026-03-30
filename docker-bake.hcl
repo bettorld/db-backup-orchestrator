@@ -1,9 +1,9 @@
 variable "DOCKER_REGISTRY" {
-  default = "docker.io"
+  default = "ghcr.io/bettorld"
 }
 
 variable "VERSION" {
-  default = "production"
+  default = "latest"
 }
 
 group "default" {
@@ -15,7 +15,7 @@ target "db-backup-orchestrator" {
   dockerfile = "Dockerfile"
   tags = [
     "${DOCKER_REGISTRY}/db-backup-orchestrator:${VERSION}",
-    "${DOCKER_REGISTRY}/db-backup-orchestrator:production",
+    "${DOCKER_REGISTRY}/db-backup-orchestrator:latest",
   ]
   platforms = ["linux/amd64"]
 }

@@ -1,7 +1,5 @@
 """Tests for logging credential redaction."""
 
-import pytest
-
 from db_backup_orchestrator.utils.logging import redact
 
 

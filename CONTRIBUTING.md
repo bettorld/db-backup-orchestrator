@@ -10,7 +10,7 @@ Thanks for your interest in contributing to DB Backup Orchestrator!
 ## Getting Started
 
 ```bash
-git clone https://github.com/<owner>/db-backup-orchestrator.git
+git clone https://github.com/bettorld/db-backup-orchestrator.git
 cd db-backup-orchestrator
 cp .env.example .env      # adjust DOCKER_REGISTRY if needed
 make help                  # see all available targets

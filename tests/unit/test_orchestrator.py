@@ -56,7 +56,9 @@ def _dump_side_effect(content: str):
         if output_path:
             output_path.parent.mkdir(parents=True, exist_ok=True)
             output_path.write_text(content)
-        return DockerResult(stdout="" if output_path else content, stderr="", returncode=0)
+        return DockerResult(
+            stdout="" if output_path else content, stderr="", returncode=0
+        )
 
     return side_effect
 
@@ -73,9 +75,15 @@ def _make_mock_driver() -> MagicMock:
     )
     mock.list_databases.return_value = ["app_store", "analytics"]
     mock.list_schemas.return_value = ["public", "inventory"]
-    mock.dump_globals.side_effect = _dump_side_effect("-- Globals\nCREATE ROLE testuser;\n")
-    mock.dump_schema.side_effect = _dump_side_effect("-- Schema dump\nCREATE TABLE products;\n")
-    mock.dump_table.side_effect = _dump_side_effect("-- Table dump\nCREATE TABLE users;\n")
+    mock.dump_globals.side_effect = _dump_side_effect(
+        "-- Globals\nCREATE ROLE testuser;\n"
+    )
+    mock.dump_schema.side_effect = _dump_side_effect(
+        "-- Schema dump\nCREATE TABLE products;\n"
+    )
+    mock.dump_table.side_effect = _dump_side_effect(
+        "-- Table dump\nCREATE TABLE users;\n"
+    )
     return mock
 
 
@@ -168,9 +176,7 @@ class TestRetryLoop:
             if output_path:
                 output_path.parent.mkdir(parents=True, exist_ok=True)
                 output_path.write_text("-- Schema\nCREATE TABLE t;\n")
-            return DockerResult(
-                stdout="", stderr="", returncode=0
-            )
+            return DockerResult(stdout="", stderr="", returncode=0)
 
         mock_driver.dump_schema.side_effect = side_effect_dump_schema
 

@@ -205,18 +205,30 @@ class PostgresDriver(BaseDriver):
     ) -> DockerResult:
         cmd = [
             "pg_dumpall",
-            "-h", host, "-p", str(port), "-U", user,
-            "--globals-only", "--no-tablespaces",
+            "-h",
+            host,
+            "-p",
+            str(port),
+            "-U",
+            user,
+            "--globals-only",
+            "--no-tablespaces",
         ]
         if output_path:
             return docker_runner.run_to_file(
-                image=image, version=version, command=cmd,
-                output_path=output_path, env=self._env(user, password),
+                image=image,
+                version=version,
+                command=cmd,
+                output_path=output_path,
+                env=self._env(user, password),
                 timeout=timeout,
             )
         return docker_runner.run(
-            image=image, version=version, command=cmd,
-            env=self._env(user, password), timeout=timeout,
+            image=image,
+            version=version,
+            command=cmd,
+            env=self._env(user, password),
+            timeout=timeout,
         )
 
     def dump_schema(
@@ -235,20 +247,33 @@ class PostgresDriver(BaseDriver):
     ) -> DockerResult:
         cmd = [
             "pg_dump",
-            "-h", host, "-p", str(port), "-U", user,
-            "-d", database, "--no-tablespaces",
+            "-h",
+            host,
+            "-p",
+            str(port),
+            "-U",
+            user,
+            "-d",
+            database,
+            "--no-tablespaces",
         ]
         if schema:
             cmd.extend(["-n", schema])
         if output_path:
             return docker_runner.run_to_file(
-                image=image, version=version, command=cmd,
-                output_path=output_path, env=self._env(user, password),
+                image=image,
+                version=version,
+                command=cmd,
+                output_path=output_path,
+                env=self._env(user, password),
                 timeout=timeout,
             )
         return docker_runner.run(
-            image=image, version=version, command=cmd,
-            env=self._env(user, password), timeout=timeout,
+            image=image,
+            version=version,
+            command=cmd,
+            env=self._env(user, password),
+            timeout=timeout,
         )
 
     def dump_table(
@@ -269,18 +294,32 @@ class PostgresDriver(BaseDriver):
         table_ref = f"{schema}.{table}" if schema else table
         cmd = [
             "pg_dump",
-            "-h", host, "-p", str(port), "-U", user,
-            "-d", database, "-t", table_ref,
+            "-h",
+            host,
+            "-p",
+            str(port),
+            "-U",
+            user,
+            "-d",
+            database,
+            "-t",
+            table_ref,
         ]
         if output_path:
             return docker_runner.run_to_file(
-                image=image, version=version, command=cmd,
-                output_path=output_path, env=self._env(user, password),
+                image=image,
+                version=version,
+                command=cmd,
+                output_path=output_path,
+                env=self._env(user, password),
                 timeout=timeout,
             )
         return docker_runner.run(
-            image=image, version=version, command=cmd,
-            env=self._env(user, password), timeout=timeout,
+            image=image,
+            version=version,
+            command=cmd,
+            env=self._env(user, password),
+            timeout=timeout,
         )
 
     # ── Restore ───────────────────────────────────────────────────────

@@ -1,5 +1,5 @@
-ARG DOCKER_REGISTRY=docker.io
-FROM ${DOCKER_REGISTRY}/db-backup-orchestrator:production
+ARG DOCKER_REGISTRY=ghcr.io/bettorld
+FROM ${DOCKER_REGISTRY}/db-backup-orchestrator:latest
 
 WORKDIR /app
 

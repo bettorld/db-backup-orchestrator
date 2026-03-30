@@ -12,7 +12,7 @@ docker run --rm \
   -v /path/to/backups:/backups \
   -e DB_USER="backup_admin" \
   -e DB_PASSWORD="s3cret" \
-  db-backup-orchestrator:production backup \
+  db-backup-orchestrator:latest backup \
   --driver postgres --version 16 \
   --host db.prod.example.com \
   --connection prod-main \
@@ -27,7 +27,7 @@ docker run --rm \
   -v /path/to/backups:/backups \
   -e DB_USER="backup_admin" \
   -e DB_PASSWORD="s3cret" \
-  db-backup-orchestrator:production backup \
+  db-backup-orchestrator:latest backup \
   --driver mysql --version 8.0 \
   --host db.prod.example.com \
   --connection prod-mysql \
@@ -42,7 +42,7 @@ docker run --rm \
   -v /path/to/backups:/backups \
   -e DB_USER="backup_admin" \
   -e DB_PASSWORD="s3cret" \
-  db-backup-orchestrator:production backup \
+  db-backup-orchestrator:latest backup \
   --driver postgres --version 16 \
   --host db.prod.example.com \
   --connection prod-main \
@@ -57,7 +57,7 @@ docker run --rm \
   -v /path/to/backups:/backups \
   -e DB_USER="backup_admin" \
   -e DB_PASSWORD="s3cret" \
-  db-backup-orchestrator:production backup \
+  db-backup-orchestrator:latest backup \
   --driver postgres --version 16 \
   --host db.prod.example.com \
   --connection prod-main \
@@ -72,7 +72,7 @@ docker run --rm \
   -v /path/to/backups:/backups \
   -e DB_USER="backup_admin" \
   -e DB_PASSWORD="s3cret" \
-  db-backup-orchestrator:production backup \
+  db-backup-orchestrator:latest backup \
   --driver mysql --version 8.0 \
   --host analytics.internal --port 3306 \
   --connection prod-analytics \
@@ -87,7 +87,7 @@ docker run --rm \
   -v /path/to/backups:/backups \
   -e DB_USER="backup_admin" \
   -e DB_PASSWORD="s3cret" \
-  db-backup-orchestrator:production backup \
+  db-backup-orchestrator:latest backup \
   --driver postgres --version 16 \
   --host db.prod.example.com \
   --connection prod-main \
@@ -102,7 +102,7 @@ docker run --rm \
   -v /path/to/backups:/backups \
   -e DB_USER="backup_admin" \
   -e DB_PASSWORD="s3cret" \
-  db-backup-orchestrator:production backup \
+  db-backup-orchestrator:latest backup \
   --driver mariadb --version 10.11 \
   --host db.staging.example.com \
   --connection staging \
@@ -117,7 +117,7 @@ docker run --rm \
   -v /path/to/backups:/backups \
   -e DB_USER="postgres" \
   -e DB_PASSWORD="s3cret" \
-  db-backup-orchestrator:production backup \
+  db-backup-orchestrator:latest backup \
   --driver postgres --version 15 \
   --host db.internal \
   --connection prod-roles \
@@ -132,7 +132,7 @@ docker run --rm \
   -v /path/to/backups:/backups \
   -e DB_USER="backup_admin" \
   -e DB_PASSWORD="s3cret" \
-  db-backup-orchestrator:production backup \
+  db-backup-orchestrator:latest backup \
   --driver postgres --version 16 \
   --host db.prod.example.com \
   --connection prod-main \
@@ -151,7 +151,7 @@ docker run --rm \
   -e DB_USER="backup_admin" \
   -e DB_PASSWORD="s3cret" \
   -e BACKUP_ENCRYPT_KEY="my-strong-passphrase-here" \
-  db-backup-orchestrator:production backup \
+  db-backup-orchestrator:latest backup \
   --driver postgres --version 16 \
   --host db.prod.example.com \
   --connection prod-main \
@@ -166,7 +166,7 @@ docker run --rm \
   -v /path/to/backups:/backups \
   -e DB_USER="backup_admin" \
   -e DB_PASSWORD="s3cret" \
-  db-backup-orchestrator:production backup \
+  db-backup-orchestrator:latest backup \
   --driver postgres --version 16 \
   --host db.prod.example.com \
   --connection prod-main \
@@ -180,7 +180,7 @@ docker run --rm \
   -v /var/run/docker.sock:/var/run/docker.sock \
   -e DB_USER="backup_admin" \
   -e DB_PASSWORD="s3cret" \
-  db-backup-orchestrator:production backup \
+  db-backup-orchestrator:latest backup \
   --driver postgres --version 16 \
   --host db.prod.example.com \
   --connection prod-main \
@@ -196,7 +196,7 @@ docker run --rm \
   -v /workspace:/workspace \
   -e DB_USER="backup_admin" \
   -e DB_PASSWORD="s3cret" \
-  db-backup-orchestrator:production backup \
+  db-backup-orchestrator:latest backup \
   --driver mysql --version 8.0 \
   --host db.prod.example.com \
   --connection prod-mysql \
